@@ -231,7 +231,11 @@ class CGenerator(object):
         idName = makeCIdentifier(datatype.name)
         enc = "static UA_INLINE size_t\nUA_%s_calcSizeBinary(const UA_%s *src) {\n    return UA_calcSizeBinary(src, %s);\n}\n"
         enc += "static UA_INLINE UA_StatusCode\nUA_%s_encodeBinary(const UA_%s *src, UA_Byte **bufPos, const UA_Byte *bufEnd) {\n    return UA_encodeBinary(src, %s, bufPos, &bufEnd, NULL, NULL);\n}\n"
-        enc += "static UA_INLINE UA_StatusCode\nUA_%s_decodeBinary(const UA_ByteString *src, size_t *offset, UA_%s *dst) {\n    return UA_decodeBinary(src, offset, dst, %s, NULL);\n}"
+        #Decode with custom datatype passed for Variant and DataValue
+        if  str.upper(datatype.name) == "VARIANT" or str.upper(datatype.name) == "DATAVALUE":
+            enc += "static UA_INLINE UA_StatusCode\nUA_%s_decodeBinary(const UA_ByteString *src, size_t *offset, UA_%s *dst, const UA_DataTypeArray *customTypes) {\n    return UA_decodeBinary(src, offset, dst, %s, customTypes);\n}"
+        else:
+            enc += "static UA_INLINE UA_StatusCode\nUA_%s_decodeBinary(const UA_ByteString *src, size_t *offset, UA_%s *dst) {\n    return UA_decodeBinary(src, offset, dst, %s, NULL);\n}"
         return enc % tuple(
             list(itertools.chain(*itertools.repeat([idName, idName, self.print_datatype_ptr(datatype)], 3))))
 

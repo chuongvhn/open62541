@@ -292,7 +292,7 @@ void UA_ReaderGroup_subscribeCallback(UA_Server *server, UA_ReaderGroup *readerG
         UA_NetworkMessage currentNetworkMessage;
         memset(&currentNetworkMessage, 0, sizeof(UA_NetworkMessage));
         size_t currentPosition = 0;
-        UA_NetworkMessage_decodeBinary(&buffer, &currentPosition, &currentNetworkMessage);
+        UA_NetworkMessage_decodeBinary(&buffer, &currentPosition, &currentNetworkMessage, server->config.customDataTypes);
         UA_Server_processNetworkMessage(server, &currentNetworkMessage, connection);
         UA_NetworkMessage_deleteMembers(&currentNetworkMessage);
     }

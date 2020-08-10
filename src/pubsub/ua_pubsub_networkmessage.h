@@ -135,7 +135,7 @@ UA_DataSetMessage_encodeBinary(const UA_DataSetMessage* src, UA_Byte **bufPos,
 
 UA_StatusCode
 UA_DataSetMessage_decodeBinary(const UA_ByteString *src, size_t *offset,
-                               UA_DataSetMessage* dst);
+                               UA_DataSetMessage* dst, const UA_DataTypeArray *customTypes);
 
 size_t
 UA_DataSetMessage_calcSizeBinary(UA_DataSetMessage *p, UA_NetworkMessageOffsetBuffer *offsetBuffer,
@@ -248,7 +248,7 @@ UA_NetworkMessage_encodeBinary(const UA_NetworkMessage* src,
 
 UA_StatusCode
 UA_NetworkMessage_decodeBinary(const UA_ByteString *src, size_t *offset,
-                               UA_NetworkMessage* dst);
+                               UA_NetworkMessage* dst,  const UA_DataTypeArray *customTypes);
 
 size_t
 UA_NetworkMessage_calcSizeBinary(UA_NetworkMessage *p, UA_NetworkMessageOffsetBuffer *offsetBuffer);
