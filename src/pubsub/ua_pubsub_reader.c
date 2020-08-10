@@ -925,7 +925,7 @@ void UA_ReaderGroup_subscribeCallback(UA_Server *server, UA_ReaderGroup *readerG
                 size_t paddingBytes = 0;
                 UA_NetworkMessage currentNetworkMessage;
                 memset(&currentNetworkMessage, 0, sizeof(UA_NetworkMessage));
-                UA_NetworkMessage_decodeBinary(&buffer, &currentPosition, &currentNetworkMessage);
+                UA_NetworkMessage_decodeBinary(&buffer, &currentPosition, &currentNetworkMessage, server->config.customDataTypes);
                 UA_Server_processNetworkMessage(server, &currentNetworkMessage, connection);
                 UA_NetworkMessage_clear(&currentNetworkMessage);
                 /* Minimum ethernet packet size is 64 bytes where the header size is 14 bytes and FCS size is 4 bytes
@@ -936,7 +936,6 @@ void UA_ReaderGroup_subscribeCallback(UA_Server *server, UA_ReaderGroup *readerG
                     paddingBytes = (MIN_PAYLOAD_SIZE_ETHERNET - (currentPosition - previousPosition));
                     currentPosition += paddingBytes; /* During multiple receive, move the position to handle padding bytes */
                 }
-
                 previousPosition = currentPosition;
             } while((buffer.length) > currentPosition);
         }
