@@ -1,7 +1,8 @@
 #!/bin/bash
-# set -x
+#set -x
 
-setup_script="$(find /home/developer/vrte/sdk/linux-x86_64 -maxdepth 4 -name "environment-setup*")"
+# -H to traverse symbolic link, otherwise the seach terminates at symbolic link
+setup_script="$(find -H /home/developer/vrte/sdk/linux-x86_64/ -maxdepth 4 -name "environment-setup*")"
 
 if [ -n "$setup_script" ]; then
     if [ $(wc -l <<< $setup_script) -gt 1 ]; then

@@ -299,7 +299,7 @@ UA_Server_init(UA_Server *server) {
     }
     server->namespaces[0] = UA_STRING_ALLOC("http://opcfoundation.org/UA/");
     server->namespaces[1] = UA_STRING_NULL;
-    server->namespacesSize = 2;
+    server->namespacesSize = 20;
 
     /* Initialize SecureChannel */
     TAILQ_INIT(&server->channels);
