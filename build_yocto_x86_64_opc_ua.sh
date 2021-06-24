@@ -46,16 +46,14 @@ BUILD_OPTS="-DUA_ENABLE_PUBSUB=TRUE \
 -DUA_DEBUG=TRUE" 
 
 DEST_DIR_YOCTO="/home/developer/vrte/sdk/linux-x86_64/usr"
-<<<<<<< HEAD
-	
-=======
+
 
 #need to clean-up build folder otherwise cmake does not recognize new bulid configuration
 #need to retain install folder
 #we are in builddir now
 find . -maxdepth 1 -name "*" -type f -exec rm -vf {} +
 
->>>>>>> Fix: clean folder before static library build
+
 #build static libraries first
 cmake ${BUILD_OPTS} -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${DEST_DIR_YOCTO} -LA ..
 cmake --build .
