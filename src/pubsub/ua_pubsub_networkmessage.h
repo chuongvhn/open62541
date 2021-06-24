@@ -83,18 +83,6 @@ typedef struct {
     } data;
 } UA_DataSetMessage;
 
-UA_StatusCode
-UA_DataSetMessage_encodeBinary(const UA_DataSetMessage* src, UA_Byte **bufPos,
-                               const UA_Byte *bufEnd);
-
-UA_StatusCode
-UA_DataSetMessage_decodeBinary(const UA_ByteString *src, size_t *offset,
-                               UA_DataSetMessage* dst, const UA_DataTypeArray *customTypes);
-
-size_t
-UA_DataSetMessage_calcSizeBinary(UA_DataSetMessage *p, UA_NetworkMessageOffsetBuffer *offsetBuffer,
-                                 size_t currentOffset);
-
 void UA_DataSetMessage_free(const UA_DataSetMessage* p);
 
 typedef struct {
@@ -255,7 +243,7 @@ UA_DataSetMessage_encodeBinary(const UA_DataSetMessage* src, UA_Byte **bufPos,
 
 UA_StatusCode
 UA_DataSetMessage_decodeBinary(const UA_ByteString *src, size_t *offset,
-                               UA_DataSetMessage* dst);
+                               UA_DataSetMessage* dst, const UA_DataTypeArray *customTypes);
 
 size_t
 UA_DataSetMessage_calcSizeBinary(UA_DataSetMessage *p, UA_NetworkMessageOffsetBuffer *offsetBuffer,

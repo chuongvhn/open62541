@@ -124,14 +124,14 @@ UA_NetworkMessage_updateBufferedNwMessage(UA_NetworkMessageOffsetBuffer *buffer,
             break;
         case UA_PUBSUB_OFFSETTYPE_PAYLOAD_DATAVALUE:
             rv = UA_DataValue_decodeBinary(src, &offset,
-                                           &(dsm->data.keyFrameData.dataSetFields[payloadCounter]));
+                                           &(dsm->data.keyFrameData.dataSetFields[payloadCounter]),NULL);
             if(rv != UA_STATUSCODE_GOOD)
                 return rv;
             payloadCounter++;
             break;
         case UA_PUBSUB_OFFSETTYPE_PAYLOAD_VARIANT:
             rv = UA_Variant_decodeBinary(src, &offset,
-                                         &dsm->data.keyFrameData.dataSetFields[payloadCounter].value);
+                                         &dsm->data.keyFrameData.dataSetFields[payloadCounter].value, NULL);
             if(rv != UA_STATUSCODE_GOOD)
                 return rv;
             dsm->data.keyFrameData.dataSetFields[payloadCounter].hasValue = true;
